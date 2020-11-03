@@ -3,10 +3,16 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
-#[cfg(not(all(target_arch = "wasm32", not(any(target_os = "emscripten", target_os = "wasi")))))]
+#[cfg(not(all(
+    target_arch = "wasm32",
+    not(any(target_os = "emscripten", target_os = "wasi"))
+)))]
 use libc;
 
-#[cfg(all(target_arch = "wasm32", not(any(target_os = "emscripten", target_os = "wasi"))))]
+#[cfg(all(
+    target_arch = "wasm32",
+    not(any(target_os = "emscripten", target_os = "wasi"))
+))]
 mod libc {
     pub type c_void = u8;
     pub type c_int = i32;
@@ -36,19 +42,10 @@ mod imp {
         }
     }
 
-    import!{
-        pub mod aead_poly1305;
-        pub mod chacha20poly1305;
-        pub mod salsa20;
-        pub mod chacha20;
-        pub mod poly1305;
-        pub mod hmac_sha2_256;
-        pub mod sha2_256;
-        pub mod sha2_384;
-        pub mod sha2_512;
+    import! {
+        pub mod hash;
         pub mod ed25519;
         pub mod curve25519;
-        pub mod hacl_policies;
         pub mod nacl;
     }
 }

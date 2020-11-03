@@ -2,19 +2,18 @@
 
 pub type __uint8_t = crate::libc::c_uchar;
 pub type __uint32_t = crate::libc::c_uint;
-pub type Hacl_Ed25519_uint8_p = *mut u8;
-pub type Hacl_Ed25519_hint8_p = *mut u8;
 extern "C" {
-    pub fn Hacl_Ed25519_sign(signature: *mut u8, secret: *mut u8, msg: *mut u8, len1: u32);
+    pub fn Hacl_Ed25519_sign(signature: *mut u8, priv_: *mut u8, len: u32, msg: *mut u8);
 }
 extern "C" {
-    pub fn Hacl_Ed25519_verify(
-        public: *mut u8,
-        msg: *mut u8,
-        len1: u32,
-        signature: *mut u8,
-    ) -> bool;
+    pub fn Hacl_Ed25519_verify(pub_: *mut u8, len: u32, msg: *mut u8, signature: *mut u8) -> bool;
 }
 extern "C" {
-    pub fn Hacl_Ed25519_secret_to_public(out: *mut u8, secret: *mut u8);
+    pub fn Hacl_Ed25519_secret_to_public(pub_: *mut u8, priv_: *mut u8);
+}
+extern "C" {
+    pub fn Hacl_Ed25519_expand_keys(ks: *mut u8, priv_: *mut u8);
+}
+extern "C" {
+    pub fn Hacl_Ed25519_sign_expanded(signature: *mut u8, ks: *mut u8, len: u32, msg: *mut u8);
 }
