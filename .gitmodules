@@ -1,3 +1,0 @@
-[submodule "hacl-c"]
-	path = hacl-star-sys/hacl-c
-	url = https://github.com/mitls/hacl-c
